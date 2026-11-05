@@ -88,8 +88,4 @@
     });
   });
   sub.addEventListener('mouseleave', function () { sub.classList.remove('shut'); });
-
-  Array.prototype.forEach.call(document.querySelectorAll('[data-print]'), function (button) {
-    button.addEventListener('click', function () { window.print(); });
-  });
 })();

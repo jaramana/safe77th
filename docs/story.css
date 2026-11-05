@@ -408,14 +408,15 @@ details.log td:last-child { overflow-wrap: anywhere; }
 }
 .story-body .cta:hover { background: var(--brand-hover); }
 
-/* The signature form. It stands tall enough that it never scrolls inside itself. */
-.form-embed iframe { display: block; width: 100%; height: 1720px; border: 0; }
+/* The signature form can't scroll or report its height, so each frame is tall enough
+   for the form plus its error messages. Recheck these when the form's text changes. */
+.form-embed iframe { display: block; width: 100%; height: 1840px; border: 0; }
 .form-open { color: var(--ink-soft); font-size: .875rem; }
 @media (max-width: 40rem) {
-  .form-embed iframe { height: 2400px; }
+  .form-embed iframe { height: 2450px; }
 }
 @media (max-width: 23rem) {
-  .form-embed iframe { height: 2800px; }
+  .form-embed iframe { height: 2870px; }
 }
 
 /* One more thing: a check box, the action, and its link. */
@@ -436,7 +437,6 @@ details.log td:last-child { overflow-wrap: anywhere; }
 .do-note { color: var(--ink-soft); font-size: .875rem; }
 
 .story-body .petition { border: 2px solid var(--brand); border-radius: 14px; }
-.story-body .petition-actions { margin-bottom: 0; }
 .story-body .footer { max-width: none; margin-top: 4rem; background: var(--paper-sunk) }
 .story-body .footer > * { max-width: var(--measure); margin-left: auto; margin-right: auto; }
 
@@ -521,10 +521,6 @@ details.log td:last-child { overflow-wrap: anywhere; }
     --brand: #000;
   }
   .site-nav { display: none; }
-
-  /* Only the petition prints. Sections with their own display would otherwise escape styles.css. */
-  main > *:not(#sign), #sign > *:not(#petition) { display: none !important; }
-  .signatures td { height: .36in; }
   .story-body .footer { display: none; }
   .story-body .petition { border: 0; }
   .after { padding: 0; }

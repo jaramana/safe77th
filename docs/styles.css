@@ -380,7 +380,6 @@ figure.hero img { border: 0; }
 .cta:hover { background: var(--accent); }
 .cta[hidden] { display: none; }
 
-/* The petition doubles as the printed signature sheet. */
 .petition {
   margin: 2.5rem 0 1rem;
   padding: 1.5rem;
@@ -392,26 +391,13 @@ figure.hero img { border: 0; }
 .memo th { width: 3.5rem; color: var(--ink-faint); font-weight: 400; }
 .demands { margin: 0 0 1.5rem; padding-left: 1.4rem; }
 .demands li { margin-bottom: .35rem; }
-.signatures { width: 100%; border-collapse: collapse; font-size: .8125rem; table-layout: fixed; }
-.signatures th { padding: .3rem .4rem; border: 1px solid var(--ink-soft); font-weight: 700; text-align: left; }
-.signatures td { height: 2.4rem; border: 1px solid var(--ink-soft); }
-.sig-name, .sig-address { width: 28%; }
-.sig-count { width: 10%; }
-.sig-sign { width: 24%; }
 
 @media (max-width: 34rem) {
   .petition { padding: 1rem; }
-  .signatures { font-size: .6875rem; }
-  .signatures th { padding: .25rem; overflow-wrap: anywhere; }
 }
 
 @media print {
   @page { margin: .6in; }
   body { background: #fff; font-size: 11pt; line-height: 1.35; }
   .skip, .masthead, .toc, .footer { display: none; }
-  .layout, .report, #sign { display: block; margin: 0; padding: 0; max-width: none; border: 0; }
-  main > *, #sign > * { display: none; }
-  main > #sign, #sign > #petition { display: block; }
-  #petition { margin: 0; padding: 0; border: 0; }
-  .signatures td { height: .42in; }
 }
