@@ -1,0 +1,528 @@
+/* 77th Street: a report with pinned map scenes, in street-sign green and white. */
+
+:root {
+  --paper: #ffffff;
+  --paper-sunk: #eef6f0;
+  --ink: #0e2f22;
+  --ink-soft: #3d5a4c;
+  --ink-faint: #4f6b5c;
+  --rule: #cfe3d6;
+  --accent: #006b3f;
+  --glass: rgba(255, 255, 255, .92);
+  --brand: #006b3f;
+  --brand-hover: #00552f;
+  --on-brand: #ffffff;
+  --measure: 44rem;
+  --wide: 68rem;
+  --nav-h: 3rem;
+}
+
+html { scroll-padding-top: calc(var(--nav-h) + 1rem); }
+
+.story-page { padding: 0; counter-reset: exhibit; }
+.story { position: relative; }
+.story-body h2 { color: var(--accent); }
+
+html { --stage: #ffffff; --opener: #006b3f; }
+
+/* ---- Navigation ---------------------------------------------------- */
+
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 6;
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  min-height: var(--nav-h);
+  padding: 0 var(--gutter);
+  background: var(--glass);
+  -webkit-backdrop-filter: saturate(140%) blur(12px);
+  backdrop-filter: saturate(140%) blur(12px);
+  border-bottom: 1px solid var(--rule);
+}
+.site-nav-mark {
+  color: var(--accent);
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.site-nav-links {
+  display: flex;
+  flex: 1;
+  gap: 1.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: .9375rem;
+}
+.site-nav-links a {
+  display: block;
+  padding: .3rem 0;
+  border-bottom: 2px solid transparent;
+  color: var(--ink-soft);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.site-nav-links a:hover { color: var(--ink); }
+.site-nav-links a[aria-current="true"] { border-bottom-color: var(--accent); color: var(--ink); font-weight: 700; }
+.site-nav-sign {
+  padding: .35rem .9rem;
+  background: var(--brand);
+  border-radius: 999px;
+  color: var(--on-brand);
+  font-size: .875rem;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.site-nav-sign:hover { background: var(--brand-hover); }
+.site-nav-toggle { display: none; }
+
+/* Evidence's sections drop down from the nav. On phones they sit indented in the menu. */
+.site-nav-sub { display: none; }
+@media (min-width: 58.01rem) {
+  .has-sub { position: relative; }
+  .has-sub > a::after { content: " \25BE"; }
+
+  /* The panel touches the link, so the pointer can cross without it closing. */
+  .has-sub:not(.shut):hover .site-nav-sub,
+  .has-sub:focus-within .site-nav-sub {
+    display: block;
+    position: absolute;
+    top: 100%;
+    left: -1rem;
+    min-width: 15rem;
+    margin: 0;
+    padding: .4rem 1rem;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 0 0 6px 6px;
+    box-shadow: 0 8px 16px rgba(14, 47, 34, .08);
+    list-style: none;
+  }
+  .site-nav-sub a { padding: .35rem 0; border-bottom: 0; white-space: nowrap; }
+}
+
+/* ---- Opening photo --------------------------------------------------- */
+
+.hero {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  min-height: min(78vh, 46rem);
+  padding: 2rem var(--gutter);
+}
+.hero > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 72% 58%;
+}
+
+/* ---- Section openers lead straight into the pinned scene ------------ */
+
+.opener {
+  padding: clamp(3.5rem, 12vh, 7rem) var(--gutter);
+  background: var(--opener);
+  color: #ffffff;
+  text-align: center;
+}
+.story-body .opener h2 {
+  margin: 0 0 .5rem;
+  padding: 0;
+  border: 0;
+  color: inherit;
+  font-size: clamp(2.5rem, 7vw, 4.5rem);
+  line-height: 1.05;
+  letter-spacing: -.02em;
+}
+.opener p { margin: 0; font-size: clamp(1.125rem, 2.5vw, 1.5rem); }
+
+/* ---- Pinned scenes --------------------------------------------------- */
+
+/* Without scripts, the text simply reads in order. */
+.stage { display: none; }
+
+.js .stage {
+  display: block;
+  position: sticky;
+  top: 0;
+  z-index: 0;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+  background: var(--stage);
+}
+
+.layer {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity .45s ease;
+}
+.layer.on { opacity: 1; }
+@media (prefers-reduced-motion: reduce) {
+  .layer { transition: none; }
+}
+
+/* The map fills the stage, with its block clear of the card on the left. */
+.map-base,
+.layer-map img,
+.layer-wide img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 62% 50%;
+}
+.map-base { background: var(--stage); }
+.layer-wide img { object-position: 50% 50%; }
+.layer-wide { background: var(--stage); }
+.layer-route { background: var(--stage); }
+.layer-route img {
+  position: absolute;
+  top: calc(var(--nav-h) + 2vh);
+  right: max(var(--gutter), calc(50vw - 24rem));
+  width: auto;
+  height: calc(96vh - var(--nav-h) - 2vh);
+  height: calc(96svh - var(--nav-h) - 2vh);
+  border-radius: 14px;
+}
+
+.js .steps {
+  position: relative;
+  z-index: 1;
+  margin-top: -100vh;
+  margin-top: -100svh;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  min-height: 90vh;
+  min-height: 90svh;
+  padding: 2rem var(--gutter);
+  pointer-events: none;
+}
+
+.card {
+  position: relative;
+  width: 100%;
+  max-width: 24rem;
+  padding: 1.25rem 1.5rem;
+  background: var(--paper);
+  border-radius: 14px;
+  box-shadow: 0 2px 24px rgba(14, 47, 34, .18);
+  color: var(--ink);
+  font-size: 1.25rem;
+  line-height: 1.4;
+  pointer-events: auto;
+}
+.card p { margin: 0; }
+.card p + p { margin-top: .75rem; }
+.card sup { font-size: .6em; }
+.card sup a { color: inherit; text-decoration: none; }
+
+/* The opening card reads as a street sign. */
+.card-title {
+  max-width: 36rem;
+  padding: 1.5rem 1.75rem;
+  background: var(--brand);
+  box-shadow: inset 0 0 0 3px var(--on-brand), 0 2px 24px rgba(14, 47, 34, .22);
+  color: var(--on-brand);
+}
+.card-title h1 { margin: 0 0 .5rem; color: inherit; font-size: clamp(2rem, 5vw, 3rem); line-height: 1.05; }
+.card-title .dateline { margin: 0; color: inherit; font-size: .875rem; opacity: .9; }
+.card-title .dateline + p { margin-top: 1rem; }
+.card-time { color: var(--accent); font-weight: 700; }
+
+/* ---- Report sections ------------------------------------------------- */
+
+.after {
+  position: relative;
+  z-index: 2;
+  max-width: calc(var(--measure) + 2 * var(--gutter));
+  margin: 0 auto;
+  padding: 2rem var(--gutter) 0;
+}
+.report section { padding-top: 0; }
+.story-body h2 { margin-top: 1rem; font-size: 1.75rem; }
+.story-body h3 { margin: 3rem 0 .75rem; color: var(--accent); font-size: 1.25rem; }
+.lede { font-size: 1.1875rem; }
+#want, #sign, #evidence { scroll-margin-top: var(--nav-h); }
+
+/* ---- What we want: the page's closing argument ----------------------- */
+
+.want {
+  padding: clamp(3rem, 9vh, 6rem) var(--gutter);
+  background: var(--brand);
+  color: #ffffff;
+}
+.want-inner { max-width: var(--measure); margin: 0 auto; }
+.story-body .want h2 {
+  margin: 0 0 1.5rem;
+  padding: 0;
+  border: 0;
+  color: inherit;
+  font-size: clamp(2.5rem, 7vw, 4.5rem);
+  line-height: 1.05;
+  letter-spacing: -.02em;
+}
+.want a { color: inherit; }
+.story-body .asks {
+  width: 100%;
+  margin: 0 0 2rem;
+  border-collapse: collapse;
+  font-size: 1.0625rem;
+  line-height: 1.35;
+}
+.asks th, .asks td {
+  padding: .8rem 1rem .8rem 0;
+  border-top: 1px solid rgba(255, 255, 255, .4);
+  text-align: left;
+  vertical-align: top;
+}
+.asks thead th { border-top: 0; font-size: .875rem; font-weight: 400; }
+.asks td:first-child, .asks th:first-child { width: 2.25rem; }
+.asks td:nth-child(2) { font-weight: 700; }
+.asks td:last-child, .asks th:last-child { width: 30%; padding-right: 0; }
+.asks tbody tr:last-child td { border-bottom: 1px solid rgba(255, 255, 255, .4); }
+.asks .ask-done td:nth-child(2) { font-weight: 400; }
+.asks .ask-done td:first-child { font-size: 1.25rem; font-weight: 700; line-height: 1.1; }
+.asks sup a { text-decoration: none; }
+.story-body .want .cta-light { background: #ffffff; color: var(--brand); text-decoration: none; }
+.story-body .want .cta-light:hover { background: var(--paper-sunk); }
+
+.brief th { width: 8rem; }
+
+/* Exhibits run in reading order, so they can be cited in a meeting. */
+.ex figcaption::before,
+caption.ex::before {
+  content: "Exhibit " counter(exhibit) ". ";
+  counter-increment: exhibit;
+  color: var(--ink);
+  font-weight: 700;
+}
+caption.ex {
+  margin-bottom: .5rem;
+  color: var(--ink-soft);
+  font-size: .875rem;
+  line-height: 1.45;
+  text-align: left;
+}
+
+.photos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
+  gap: 1.5rem;
+  max-width: calc(var(--wide) + 2 * var(--gutter));
+  margin: 1.5rem auto 2rem;
+  padding: 0 var(--gutter);
+}
+.photos figure { margin: 0; }
+.photos img {
+  width: 100%;
+  aspect-ratio: 5 / 4;
+  object-fit: cover;
+  border: 0;
+  border-radius: 6px;
+}
+.after figure img, .after figure video { border: 0; border-radius: 6px; }
+
+/* One lunch hour: three photos, each under its time. */
+.lunch {
+  max-width: calc(var(--wide) + 2 * var(--gutter));
+  margin: 3.5rem auto 2rem;
+  padding: 0 var(--gutter);
+}
+.lunch-title { margin: 0 0 .5rem; color: var(--accent); font-size: 1.25rem; }
+.lunch-lead { max-width: 40rem; margin: 0 0 2rem; font-size: clamp(1.25rem, 2.5vw, 1.625rem); line-height: 1.3; }
+.lunch-frames {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+  gap: 1.5rem;
+  margin: 0 0 1rem;
+  padding: 0;
+  list-style: none;
+}
+.lunch-frames p { margin: .6rem 0 0; }
+.lunch-frames .lunch-time {
+  margin: 0 0 .4rem;
+  color: var(--accent);
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  letter-spacing: -.02em;
+}
+.lunch-frames img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 40%; border: 0; border-radius: 6px; }
+.lunch figcaption { color: var(--ink-soft); font-size: .875rem; line-height: 1.45; }
+
+.story-body table.crossings td:first-child { font-weight: 400; }
+.story-body table.crossings { margin-top: 1rem; }
+.crossings .num { padding-left: 0; padding-right: 1rem; text-align: left; }
+
+.clock td:first-child { white-space: nowrap; }
+.clock td:last-child { font-weight: 400; }
+
+details.log { margin: 1rem 0 2rem; }
+details.log summary { color: var(--accent); cursor: pointer; font-weight: 700; }
+details.log .crossings { font-size: .875rem; }
+details.log td { padding-top: .45rem; padding-bottom: .45rem; }
+details.log td:last-child { overflow-wrap: anywhere; }
+
+/* Crashes placed along the street. Dots keep their size at every width. */
+.strip { margin: 1.5rem 0 1rem; }
+.strip-field {
+  position: relative;
+  height: calc(var(--levels) * 13px + 6px);
+  margin: 0 5px;
+  border-bottom: 2px solid var(--ink);
+}
+.dot {
+  position: absolute;
+  bottom: calc(var(--level) * 13px + 3px);
+  width: 10px;
+  height: 10px;
+  margin-left: -5px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px var(--paper);
+}
+.dot.hurt { background: var(--brand); }
+.dot.unhurt { background: var(--paper); border: 1.5px solid var(--ink-faint); }
+.strip-axis { position: relative; height: 1.75rem; margin: 0 5px; font-size: .8125rem; color: var(--ink-soft); }
+.strip-axis span { position: absolute; top: .3rem; transform: translateX(-50%); white-space: nowrap; }
+.strip-axis span:first-child { transform: none; }
+.strip-axis span:last-child { transform: translateX(-100%); }
+.strip-key { display: flex; flex-wrap: wrap; gap: .25rem 1.25rem; margin: 0 0 .5rem; color: var(--ink-soft); font-size: .875rem; }
+.strip-key .dot { position: static; display: inline-block; margin: 0 .35rem 0 0; }
+
+.story-body .cta {
+  background: var(--brand);
+  border-radius: 999px;
+  color: var(--on-brand);
+}
+.story-body .cta:hover { background: var(--brand-hover); }
+
+/* The signature form. It stands tall enough that it never scrolls inside itself. */
+.form-embed iframe { display: block; width: 100%; height: 1462px; border: 0; }
+.form-open { color: var(--ink-soft); font-size: .875rem; }
+@media (max-width: 40rem) {
+  .form-embed iframe { height: 2000px; }
+}
+
+/* One more thing: a check box, the action, and its link. */
+.story-body .do-lead { margin: 2rem 0 .5rem; }
+.do-list { margin: 0 0 .75rem; padding: 0; list-style: none; }
+.do-list li {
+  display: grid;
+  grid-template-columns: 1.25rem 1fr 6.5rem;
+  gap: .75rem;
+  align-items: center;
+  padding: .6rem 0;
+  border-top: 1px solid var(--rule);
+}
+.do-list li:last-child { border-bottom: 1px solid var(--rule); }
+.do-list input { width: 1.15rem; height: 1.15rem; margin: 0; accent-color: var(--brand); cursor: pointer; }
+.do-list label { line-height: 1.3; cursor: pointer; }
+.do-list input:checked + label { color: var(--ink-faint); }
+.do-note { color: var(--ink-soft); font-size: .875rem; }
+
+.story-body .petition { border: 2px solid var(--brand); border-radius: 14px; }
+.story-body .petition-actions { margin-bottom: 0; }
+.story-body .footer { max-width: none; margin-top: 4rem; background: var(--paper-sunk) }
+.story-body .footer > * { max-width: var(--measure); margin-left: auto; margin-right: auto; }
+
+/* ---- Phones ------------------------------------------------------------ */
+
+/* The picture on top, the card rising from below. */
+@media (max-width: 60rem) {
+  .step { align-items: flex-end; padding: 1rem var(--gutter) 1.25rem; }
+
+  .card { max-width: none; font-size: 1.125rem; padding: 1rem 1.1rem; }
+  .card-title { padding: 1.25rem; }
+
+  .map-base,
+  .layer-map img,
+  .layer-wide img {
+    top: var(--nav-h);
+    bottom: auto;
+    height: 58vh;
+    height: 58svh;
+    object-position: 65% 50%;
+  }
+  .layer-wide img { object-position: 50% 50%; }
+  .layer-route img {
+    top: calc(var(--nav-h) + .5rem);
+    right: auto;
+    left: 50%;
+    height: 54vh;
+    height: 54svh;
+    transform: translateX(-50%);
+  }
+}
+
+/* Six sections fit down to about 58rem. Below that the nav folds behind a menu button. */
+@media (max-width: 58rem) {
+  .site-nav { gap: .75rem; }
+  .site-nav-mark { margin-right: auto; }
+  .site-nav-toggle {
+    display: block;
+    order: 3;
+    min-height: 2.25rem;
+    padding: 0 .25rem;
+    background: none;
+    border: 0;
+    color: var(--ink);
+    font: inherit;
+    font-size: .9375rem;
+    cursor: pointer;
+  }
+  .site-nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    padding: .25rem var(--gutter) .75rem;
+    background: var(--paper);
+    border-bottom: 1px solid var(--rule);
+    box-shadow: 0 8px 16px rgba(14, 47, 34, .08);
+  }
+  .site-nav.open .site-nav-links { display: block; }
+  .site-nav-links a { padding: .55rem 0; border-bottom: 0; }
+  .site-nav-links a[aria-current="true"] { color: var(--accent); }
+  .site-nav-sub { display: block; margin: 0 0 .25rem; padding: 0 0 0 1rem; list-style: none; font-size: .875rem; }
+  .site-nav-sub a { padding: .35rem 0; }
+}
+/* Without the script the menu can't open, so the links stay in place. */
+@media (max-width: 58rem) {
+  html:not(.js) .site-nav { flex-wrap: wrap; padding-bottom: .5rem; }
+  html:not(.js) .site-nav-toggle { display: none; }
+  html:not(.js) .site-nav-links { display: flex; flex-wrap: wrap; position: static; flex-basis: 100%; padding: 0; border: 0; box-shadow: none; }
+}
+@media (max-width: 30rem) {
+  .site-nav-sign .long { display: none; }
+}
+
+@media print {
+  :root {
+    --paper: #fff;
+    --ink: #000;
+    --ink-soft: #333;
+    --ink-faint: #333;
+    --brand: #000;
+  }
+  .site-nav { display: none; }
+
+  /* Only the petition prints. Sections with their own display would otherwise escape styles.css. */
+  main > *:not(#sign), #sign > *:not(#petition) { display: none !important; }
+  .signatures td { height: .36in; }
+  .story-body .footer { display: none; }
+  .story-body .petition { border: 0; }
+  .after { padding: 0; }
+}
