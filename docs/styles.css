@@ -277,17 +277,6 @@ figure video { display: block; width: 100%; height: auto; background: var(--ink)
 
 /* ---- Footer ---------------------------------------------------- */
 
-.footer {
-  max-width: calc(var(--toc-w) + var(--gap) + var(--measure) + 2 * var(--gutter));
-  margin: 0 auto;
-  padding: 2rem var(--gutter) 3rem;
-  border-top: 1px solid var(--rule);
-  color: var(--ink-soft);
-  font-size: .8125rem;
-  line-height: 1.5;
-}
-.colophon { max-width: var(--measure); margin: 0 0 1.25rem; }
-.portfolio { margin: 0; padding-top: 1.25rem; border-top: 1px solid var(--rule); }
 
 /* ---- Narrow screens -------------------------------------------- */
 
@@ -399,5 +388,5 @@ figure.hero img { border: 0; }
 @media print {
   @page { margin: .6in; }
   body { background: #fff; font-size: 11pt; line-height: 1.35; }
-  .skip, .masthead, .toc, .footer { display: none; }
+  .skip, .masthead, .toc { display: none; }
 }

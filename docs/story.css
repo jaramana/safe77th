@@ -254,6 +254,7 @@ html { --stage: #ffffff; --opener: #006b3f; }
 .story-body h3 { margin: 3rem 0 .75rem; color: var(--accent); font-size: 1.25rem; }
 .lede { font-size: 1.1875rem; }
 #want, #sign, #evidence { scroll-margin-top: var(--nav-h); }
+#sources { padding-bottom: 4rem; }
 
 /* ---- What we want: the page's closing argument ----------------------- */
 
@@ -437,8 +438,6 @@ details.log td:last-child { overflow-wrap: anywhere; }
 .do-note { color: var(--ink-soft); font-size: .875rem; }
 
 .story-body .petition { border: 2px solid var(--brand); border-radius: 14px; }
-.story-body .footer { max-width: none; margin-top: 4rem; background: var(--paper-sunk) }
-.story-body .footer > * { max-width: var(--measure); margin-left: auto; margin-right: auto; }
 
 /* ---- Phones ------------------------------------------------------------ */
 
@@ -452,11 +451,11 @@ details.log td:last-child { overflow-wrap: anywhere; }
   .map-base,
   .layer-map img,
   .layer-wide img {
-    top: var(--nav-h);
+    top: calc(var(--nav-h) + 5vh);
     bottom: auto;
-    height: 58vh;
-    height: 58svh;
-    object-position: 65% 50%;
+    height: 50vh;
+    height: 50svh;
+    object-position: 70% 50%;
   }
   .layer-wide img { object-position: 50% 50%; }
   .layer-route img {
@@ -521,7 +520,6 @@ details.log td:last-child { overflow-wrap: anywhere; }
     --brand: #000;
   }
   .site-nav { display: none; }
-  .story-body .footer { display: none; }
   .story-body .petition { border: 0; }
   .after { padding: 0; }
 }
