@@ -437,7 +437,6 @@ details.log td:last-child { overflow-wrap: anywhere; }
 .do-list input:checked + label { color: var(--ink-faint); }
 .do-note { color: var(--ink-soft); font-size: .875rem; }
 
-.story-body .petition { border: 2px solid var(--brand); border-radius: 14px; }
 
 /* ---- Phones ------------------------------------------------------------ */
 
@@ -520,6 +519,5 @@ details.log td:last-child { overflow-wrap: anywhere; }
     --brand: #000;
   }
   .site-nav { display: none; }
-  .story-body .petition { border: 0; }
   .after { padding: 0; }
 }

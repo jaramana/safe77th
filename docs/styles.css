@@ -369,21 +369,6 @@ figure.hero img { border: 0; }
 .cta:hover { background: var(--accent); }
 .cta[hidden] { display: none; }
 
-.petition {
-  margin: 2.5rem 0 1rem;
-  padding: 1.5rem;
-  border: 1px solid var(--ink);
-}
-.petition h3 { margin-top: 0; }
-.memo { width: 100%; margin-bottom: 1rem; border-collapse: collapse; font-size: .9375rem; }
-.memo th, .memo td { padding: .35rem 0; text-align: left; vertical-align: top; }
-.memo th { width: 3.5rem; color: var(--ink-faint); font-weight: 400; }
-.demands { margin: 0 0 1.5rem; padding-left: 1.4rem; }
-.demands li { margin-bottom: .35rem; }
-
-@media (max-width: 34rem) {
-  .petition { padding: 1rem; }
-}
 
 @media print {
   @page { margin: .6in; }
