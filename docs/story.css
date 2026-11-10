@@ -1,29 +1,28 @@
-/* 77th Street: a report with pinned map scenes, in street-sign green and white. */
+/* 77th Street: a plain one-column report with pinned map scenes. */
 
 :root {
   --paper: #ffffff;
-  --paper-sunk: #eef6f0;
-  --ink: #0e2f22;
-  --ink-soft: #3d5a4c;
-  --ink-faint: #4f6b5c;
-  --rule: #cfe3d6;
+  --paper-sunk: #f4f4f2;
+  --ink: #111111;
+  --ink-soft: #444444;
+  --ink-faint: #6b6b6b;
+  --rule: #d9d9d5;
   --accent: #006b3f;
-  --glass: rgba(255, 255, 255, .92);
   --brand: #006b3f;
   --brand-hover: #00552f;
   --on-brand: #ffffff;
-  --measure: 44rem;
+  --measure: 40rem;
   --wide: 68rem;
   --nav-h: 3rem;
+  --space: clamp(4rem, 10vh, 6rem);
 }
 
 html { scroll-padding-top: calc(var(--nav-h) + 1rem); }
 
-.story-page { padding: 0; counter-reset: exhibit; }
+.story-page { padding: 0; counter-reset: exhibit sec; }
 .story { position: relative; }
-.story-body h2 { color: var(--accent); }
 
-html { --stage: #ffffff; --opener: #006b3f; }
+html { --stage: #ffffff; }
 
 /* ---- Navigation ---------------------------------------------------- */
 
@@ -36,13 +35,11 @@ html { --stage: #ffffff; --opener: #006b3f; }
   align-items: center;
   min-height: var(--nav-h);
   padding: 0 var(--gutter);
-  background: var(--glass);
-  -webkit-backdrop-filter: saturate(140%) blur(12px);
-  backdrop-filter: saturate(140%) blur(12px);
+  background: var(--paper);
   border-bottom: 1px solid var(--rule);
 }
 .site-nav-mark {
-  color: var(--accent);
+  color: var(--ink);
   font-weight: 700;
   text-decoration: none;
   white-space: nowrap;
@@ -54,7 +51,7 @@ html { --stage: #ffffff; --opener: #006b3f; }
   margin: 0;
   padding: 0;
   list-style: none;
-  font-size: .9375rem;
+  font-size: .875rem;
 }
 .site-nav-links a {
   display: block;
@@ -65,11 +62,10 @@ html { --stage: #ffffff; --opener: #006b3f; }
   white-space: nowrap;
 }
 .site-nav-links a:hover { color: var(--ink); }
-.site-nav-links a[aria-current="true"] { border-bottom-color: var(--accent); color: var(--ink); font-weight: 700; }
+.site-nav-links a[aria-current="true"] { border-bottom-color: var(--ink); color: var(--ink); font-weight: 700; }
 .site-nav-sign {
   padding: .35rem .9rem;
   background: var(--brand);
-  border-radius: 999px;
   color: var(--on-brand);
   font-size: .875rem;
   font-weight: 700;
@@ -104,42 +100,57 @@ html { --stage: #ffffff; --opener: #006b3f; }
   .site-nav-sub a { padding: .35rem 0; border-bottom: 0; white-space: nowrap; }
 }
 
-/* ---- Opening photo --------------------------------------------------- */
+/* ---- Opening ----------------------------------------------------------- */
+
+/* The page opens like a first page: the title, then the photo, in the text column. */
 
 .hero {
-  position: relative;
   display: flex;
-  align-items: flex-end;
-  min-height: min(78vh, 46rem);
-  padding: 2rem var(--gutter);
+  flex-direction: column-reverse;
+  max-width: calc(var(--measure) + 2 * var(--gutter));
+  margin: 0 auto;
+  padding: clamp(2rem, 6vh, 3.5rem) var(--gutter) 0;
 }
 .hero > img {
-  position: absolute;
-  inset: 0;
   width: 100%;
-  height: 100%;
+  aspect-ratio: 3 / 2;
+  margin-top: 2rem;
   object-fit: cover;
   object-position: 72% 58%;
 }
 
-/* ---- Section openers lead straight into the pinned scene ------------ */
+/* ---- Section openers ---------------------------------------------------- */
+
+/* A rule, a numeral and the section's name, on the text's left edge. */
 
 .opener {
-  padding: clamp(3.5rem, 12vh, 7rem) var(--gutter);
-  background: var(--opener);
-  color: #ffffff;
-  text-align: center;
+  position: relative;
+  z-index: 2;
+  max-width: calc(var(--measure) + 2 * var(--gutter));
+  margin: 0 auto;
+  padding: var(--space) var(--gutter) 1.75rem;
+  counter-increment: sec;
 }
 .story-body .opener h2 {
-  margin: 0 0 .5rem;
-  padding: 0;
+  margin: 0;
+  padding: 1.1rem 0 0;
   border: 0;
-  color: inherit;
-  font-size: clamp(2.5rem, 7vw, 4.5rem);
-  line-height: 1.05;
+  border-top: 2px solid var(--ink);
+  font-size: clamp(1.75rem, 3.6vw, 2.25rem);
+  line-height: 1.15;
   letter-spacing: -.02em;
+  text-wrap: balance;
 }
-.opener p { margin: 0; font-size: clamp(1.125rem, 2.5vw, 1.5rem); }
+.opener h2::before { content: counter(sec); margin-right: .6em; color: var(--accent); font-weight: 400; }
+.opener p { margin: .3rem 0 0; color: var(--ink-soft); text-wrap: pretty; }
+.opener + .after, #evidence + .after { padding-top: 0; }
+.opener + .after > :first-child, #evidence + .after > :first-child { margin-top: 0; }
+
+/* On wide screens the numeral hangs in the margin, so the heading lines up with the text. */
+@media (min-width: 50rem) {
+  .story-body .opener h2 { position: relative; }
+  .opener h2::before { position: absolute; right: 100%; margin-right: .55em; }
+}
 
 /* ---- Pinned scenes --------------------------------------------------- */
 
@@ -209,17 +220,20 @@ html { --stage: #ffffff; --opener: #006b3f; }
   pointer-events: none;
 }
 
+/* The first card is already in view when the scene pins, so the second card
+   waits longer. Each picture then holds for about one screen of scrolling. */
+.js .step + .step:nth-child(2) { margin-top: 45vh; margin-top: 45svh; }
+
 .card {
   position: relative;
   width: 100%;
   max-width: 24rem;
   padding: 1.25rem 1.5rem;
   background: var(--paper);
-  border-radius: 14px;
-  box-shadow: 0 2px 24px rgba(14, 47, 34, .18);
+  border: 1px solid var(--ink);
   color: var(--ink);
-  font-size: 1.25rem;
-  line-height: 1.4;
+  font-size: 1.0625rem;
+  line-height: 1.45;
   pointer-events: auto;
 }
 .card p { margin: 0; }
@@ -227,18 +241,11 @@ html { --stage: #ffffff; --opener: #006b3f; }
 .card sup { font-size: .6em; }
 .card sup a { color: inherit; text-decoration: none; }
 
-/* The opening card reads as a street sign. */
-.card-title {
-  max-width: 36rem;
-  padding: 1.5rem 1.75rem;
-  background: var(--brand);
-  box-shadow: inset 0 0 0 3px var(--on-brand), 0 2px 24px rgba(14, 47, 34, .22);
-  color: var(--on-brand);
-}
-.card-title h1 { margin: 0 0 .5rem; color: inherit; font-size: clamp(2rem, 5vw, 3rem); line-height: 1.05; }
-.card-title .dateline { margin: 0; color: inherit; font-size: .875rem; opacity: .9; }
-.card-title .dateline + p { margin-top: 1rem; }
-.card-time { color: var(--accent); font-weight: 700; }
+/* The title sits on the page, not on a card. */
+.hero .card-title { max-width: none; padding: 0; border: 0; background: none; font-size: inherit; }
+.card-title h1 { margin: 0 0 .85rem; font-size: clamp(2.25rem, 5vw, 3.25rem); line-height: 1.03; letter-spacing: -.025em; text-wrap: balance; }
+.card-title .dateline { margin: 0; color: var(--ink-faint); font-size: .875rem; }
+.card-time { font-weight: 700; }
 
 /* ---- Report sections ------------------------------------------------- */
 
@@ -250,30 +257,25 @@ html { --stage: #ffffff; --opener: #006b3f; }
   padding: 2rem var(--gutter) 0;
 }
 .report section { padding-top: 0; }
-.story-body h2 { margin-top: 1rem; font-size: 1.75rem; }
-.story-body h3 { margin: 3rem 0 .75rem; color: var(--accent); font-size: 1.25rem; }
+.story-body h3 { margin: 2.5rem 0 .5rem; font-size: 1.125rem; }
 .lede { font-size: 1.1875rem; }
-#want, #sign, #evidence { scroll-margin-top: var(--nav-h); }
-#sources { padding-bottom: 4rem; }
+#want { scroll-margin-top: var(--nav-h); }
+#sources { padding-bottom: var(--space); }
+
+/* Footnote marks stay gray, so color in the text means a link. */
+.story-body sup a { color: var(--ink-faint); }
+.story-body sup a:hover { color: var(--accent); text-decoration: underline; }
+
+/* A nav link lands with the section's rule just under the nav. */
+.story-page > section[id] { scroll-margin-top: calc(1rem - var(--space)); }
 
 /* ---- What we want: the page's closing argument ----------------------- */
 
 .want {
-  padding: clamp(3rem, 9vh, 6rem) var(--gutter);
-  background: var(--brand);
-  color: #ffffff;
+  max-width: calc(var(--measure) + 2 * var(--gutter));
+  margin: 0 auto;
+  padding: var(--space) var(--gutter) 0;
 }
-.want-inner { max-width: var(--measure); margin: 0 auto; }
-.story-body .want h2 {
-  margin: 0 0 1.5rem;
-  padding: 0;
-  border: 0;
-  color: inherit;
-  font-size: clamp(2.5rem, 7vw, 4.5rem);
-  line-height: 1.05;
-  letter-spacing: -.02em;
-}
-.want a { color: inherit; }
 .story-body .asks {
   width: 100%;
   margin: 0 0 2rem;
@@ -283,20 +285,19 @@ html { --stage: #ffffff; --opener: #006b3f; }
 }
 .asks th, .asks td {
   padding: .8rem 1rem .8rem 0;
-  border-top: 1px solid rgba(255, 255, 255, .4);
+  border-top: 1px solid var(--rule);
   text-align: left;
   vertical-align: top;
 }
-.asks thead th { border-top: 0; font-size: .875rem; font-weight: 400; }
-.asks td:first-child, .asks th:first-child { width: 2.25rem; }
+.asks thead th { border-top: 0; color: var(--ink-faint); font-size: .875rem; font-weight: 400; }
+.asks tbody tr:first-child td { border-top: 2px solid var(--ink); }
+.asks td:first-child, .asks th:first-child { width: 2.25rem; color: var(--accent); }
 .asks td:nth-child(2) { font-weight: 700; }
 .asks td:last-child, .asks th:last-child { width: 30%; padding-right: 0; }
-.asks tbody tr:last-child td { border-bottom: 1px solid rgba(255, 255, 255, .4); }
+.asks tbody tr:last-child td { border-bottom: 1px solid var(--rule); }
 .asks .ask-done td:nth-child(2) { font-weight: 400; }
 .asks .ask-done td:first-child { font-size: 1.25rem; font-weight: 700; line-height: 1.1; }
 .asks sup a { text-decoration: none; }
-.story-body .want .cta-light { background: #ffffff; color: var(--brand); text-decoration: none; }
-.story-body .want .cta-light:hover { background: var(--paper-sunk); }
 
 .brief th { width: 8rem; }
 
@@ -321,7 +322,7 @@ caption.ex {
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
   gap: 1.5rem;
   max-width: calc(var(--wide) + 2 * var(--gutter));
-  margin: 1.5rem auto 2rem;
+  margin: 2rem auto 0;
   padding: 0 var(--gutter);
 }
 .photos figure { margin: 0; }
@@ -330,9 +331,8 @@ caption.ex {
   aspect-ratio: 5 / 4;
   object-fit: cover;
   border: 0;
-  border-radius: 6px;
 }
-.after figure img, .after figure video { border: 0; border-radius: 6px; }
+.after figure img, .after figure video { border: 0; }
 
 /* One lunch hour: three photos, each under its time. */
 .lunch {
@@ -340,7 +340,7 @@ caption.ex {
   margin: 3.5rem auto 2rem;
   padding: 0 var(--gutter);
 }
-.lunch-title { margin: 0 0 .5rem; color: var(--accent); font-size: 1.25rem; }
+.lunch-title { margin: 0 0 .5rem; font-size: 1.125rem; }
 .lunch-lead { max-width: 40rem; margin: 0 0 2rem; font-size: clamp(1.25rem, 2.5vw, 1.625rem); line-height: 1.3; }
 .lunch-frames {
   display: grid;
@@ -353,14 +353,13 @@ caption.ex {
 .lunch-frames p { margin: .6rem 0 0; }
 .lunch-frames .lunch-time {
   margin: 0 0 .4rem;
-  color: var(--accent);
   font-size: clamp(2.5rem, 5vw, 3.5rem);
   font-weight: 700;
   font-variant-numeric: tabular-nums;
   line-height: 1;
   letter-spacing: -.02em;
 }
-.lunch-frames img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 40%; border: 0; border-radius: 6px; }
+.lunch-frames img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 40%; border: 0; }
 .lunch figcaption { color: var(--ink-soft); font-size: .875rem; line-height: 1.45; }
 
 .story-body table.crossings td:first-child { font-weight: 400; }
@@ -371,7 +370,7 @@ caption.ex {
 .clock td:last-child { font-weight: 400; }
 
 details.log { margin: 1rem 0 2rem; }
-details.log summary { color: var(--accent); cursor: pointer; font-weight: 700; }
+details.log summary { color: var(--ink); cursor: pointer; font-weight: 700; }
 details.log .crossings { font-size: .875rem; }
 details.log td { padding-top: .45rem; padding-bottom: .45rem; }
 details.log td:last-child { overflow-wrap: anywhere; }
@@ -404,7 +403,6 @@ details.log td:last-child { overflow-wrap: anywhere; }
 
 .story-body .cta {
   background: var(--brand);
-  border-radius: 999px;
   color: var(--on-brand);
 }
 .story-body .cta:hover { background: var(--brand-hover); }
@@ -444,8 +442,8 @@ details.log td:last-child { overflow-wrap: anywhere; }
 @media (max-width: 60rem) {
   .step { align-items: flex-end; padding: 1rem var(--gutter) 1.25rem; }
 
-  .card { max-width: none; font-size: 1.125rem; padding: 1rem 1.1rem; }
-  .card-title { padding: 1.25rem; }
+  .card { max-width: none; padding: 1rem 1.1rem; }
+  .js .step + .step:nth-child(2) { margin-top: 30vh; margin-top: 30svh; }
 
   .map-base,
   .layer-map img,
@@ -467,7 +465,7 @@ details.log td:last-child { overflow-wrap: anywhere; }
   }
 }
 
-/* Six sections fit down to about 58rem. Below that the nav folds behind a menu button. */
+/* Seven sections fit down to about 58rem. Below that the nav folds behind a menu button. */
 @media (max-width: 58rem) {
   .site-nav { gap: .75rem; }
   .site-nav-mark { margin-right: auto; }
@@ -508,6 +506,69 @@ details.log td:last-child { overflow-wrap: anywhere; }
 }
 @media (max-width: 30rem) {
   .site-nav-sign .long { display: none; }
+}
+
+/* ---- The crash clip pins in the middle of its own dark scene --------- */
+
+.clip {
+  position: relative;
+  z-index: 2;
+  height: 160vh;
+  height: 160svh;
+  margin: 2.5rem 0;
+  background: var(--paper-sunk);
+}
+.clip-pin {
+  position: sticky;
+  top: var(--nav-h);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - var(--nav-h));
+  height: calc(100svh - var(--nav-h));
+  padding: 1.5rem var(--gutter);
+  box-sizing: border-box;
+}
+.clip figure { display: flex; flex-direction: column; align-items: center; gap: 1rem; width: 100%; max-width: 56rem; margin: 0; }
+.clip-frame { position: relative; width: 100%; }
+.clip video {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: min(68vh, 42rem);
+  max-height: min(68svh, 42rem);
+  background: #000;
+}
+.clip-play {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 4.5rem;
+  height: 4.5rem;
+  transform: translate(-50%, -50%);
+  background: var(--ink);
+  border: 0;
+  border-radius: 50%;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, .35);
+  cursor: pointer;
+}
+.clip-play::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-35%, -50%);
+  border-style: solid;
+  border-width: .8rem 0 .8rem 1.3rem;
+  border-color: transparent transparent transparent #fff;
+}
+.clip-play:hover, .clip-play:focus-visible { background: var(--accent); }
+.clip.playing .clip-play, html:not(.js) .clip-play { display: none; }
+.clip figcaption { max-width: 34rem; margin: 0; color: var(--ink-soft); text-align: center; }
+
+@media print {
+  .clip { height: auto; background: none; color: inherit; }
+  .clip-pin { position: static; height: auto; }
 }
 
 @media print {
