@@ -38,6 +38,7 @@
         if (step.firstElementChild.getBoundingClientRect().top <= line) active = step;
       });
       show(entry, active.dataset.show);
+      entry.steps.forEach(function (step) { step.classList.toggle('active', step === active); });
     });
   }
 
@@ -67,15 +68,39 @@
   window.addEventListener('resize', update);
   update();
 
+  // The phone menu opens as a sheet under the nav and locks the page behind it.
+  // Escape, a tap outside the nav, a chosen link or a wider window closes it.
   var nav = document.querySelector('.site-nav');
   var toggle = document.querySelector('.site-nav-toggle');
+  var wide = window.matchMedia('(min-width: 58.01rem)');
   function setOpen(open) {
+    if (open) nav.style.setProperty('--sheet-top', nav.getBoundingClientRect().bottom + 'px');
     nav.classList.toggle('open', open);
     toggle.setAttribute('aria-expanded', String(open));
+    document.documentElement.classList.toggle('menu-locked', open);
   }
   toggle.addEventListener('click', function () {
     setOpen(!nav.classList.contains('open'));
   });
+  nav.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && nav.classList.contains('open')) { setOpen(false); toggle.focus(); }
+  });
+  document.addEventListener('click', function (e) {
+    if (nav.classList.contains('open') && !nav.contains(e.target)) setOpen(false);
+  });
+  wide.addEventListener('change', function () { if (wide.matches) setOpen(false); });
+
+  // A chosen link closes the phone menu and the dropdown first, so the page can
+  // scroll. The dropdown can open again once the pointer has left it.
+  var sub = document.querySelector('.has-sub');
+  each('.site-nav a', function (link) {
+    link.addEventListener('click', function () {
+      setOpen(false);
+      link.blur();
+      if (sub.contains(link)) sub.classList.add('shut');
+    });
+  });
+  sub.addEventListener('mouseleave', function () { sub.classList.remove('shut'); });
 
   // A chosen link glides until the section's title sits just under the nav.
   // It re-aims every frame, so lazy images loading above the title can't make
@@ -122,18 +147,6 @@
       glide(target);
     });
   });
-
-  // A chosen link closes the phone menu and the dropdown. The dropdown can open
-  // again once the pointer has left it.
-  var sub = document.querySelector('.has-sub');
-  each('.site-nav-links a', function (link) {
-    link.addEventListener('click', function () {
-      setOpen(false);
-      link.blur();
-      if (sub.contains(link)) sub.classList.add('shut');
-    });
-  });
-  sub.addEventListener('mouseleave', function () { sub.classList.remove('shut'); });
 
   // The clip's own button plays it with sound. It pauses once scrolled out of view.
   var clip = document.querySelector('.clip');
