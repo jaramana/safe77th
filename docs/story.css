@@ -624,3 +624,9 @@ details.log td:last-child { overflow-wrap: anywhere; }
   .site-nav { display: none; }
   .after { padding: 0; }
 }
+
+/* Phone maps are drawn for a narrow view, centered on the block. */
+@media (max-width: 40rem) {
+  .map-base,
+  .layer-map img { object-position: 50% 50%; }
+}

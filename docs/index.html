@@ -107,7 +107,10 @@
 
     <div class="story">
       <div class="stage">
-        <img class="map-base" src="img/map-spotlight.jpg" alt="" width="1920" height="1201" loading="lazy">
+        <picture>
+          <source media="(max-width: 40rem)" srcset="img/map-street-base-phone.svg">
+          <img class="map-base" src="img/map-street-base.svg" alt="" width="1340" height="838" loading="lazy">
+        </picture>
         <div class="layer layer-wide on" data-layer="wide">
           <img src="img/map-wide-light.jpg" alt="" width="1600" height="1000" loading="lazy">
           <img src="img/map-wide-light.svg" alt="An aerial photo of southwest Brooklyn with 77th Street circled at the center, and the Verrazzano-Narrows Bridge to the southwest." width="1600" height="1000" loading="lazy">
@@ -116,17 +119,24 @@
           <img src="img/route.jpg" alt="Phone navigation screenshot at 8:05 in the morning. The route turns from 5th Avenue onto 77th Street and follows it to the service road beside I-278. A second route, marked similar ETA, runs along 79th Street, up 6th Avenue and onto the same block of 77th Street." width="700" height="1270" loading="lazy">
         </div>
         <div class="layer layer-map" data-layer="map-plain">
-          <img src="img/map-spot-plain.svg" alt="Map of numbered streets between 5th and 7th Avenues with one-way arrows." width="1340" height="838" loading="lazy">
+          <picture>
+            <source media="(max-width: 40rem)" srcset="img/map-street-plain-phone.svg">
+            <img src="img/map-street-plain.svg" alt="Map of the numbered streets between 5th and 7th Avenues, with an arrow on each one-way street." width="1340" height="838" loading="lazy">
+          </picture>
         </div>
         <div class="layer layer-map" data-layer="map-now">
-          <img src="img/map-spot-now.svg" alt="The same map with 77th Street marked, running one way from 5th Avenue through to 7th Avenue. Moving dots trace drivers coming up 5th Avenue and along 77th Street to 7th, some by way of 79th Street and 6th Avenue." width="1340" height="838" loading="lazy">
           <picture>
-            <source media="(prefers-reduced-motion: reduce)" srcset="img/map-flow-now-still.svg">
-            <img src="img/map-flow-now.svg" alt="" width="1340" height="838" loading="lazy">
+            <source media="(max-width: 40rem) and (prefers-reduced-motion: reduce)" srcset="img/map-street-now-still-phone.svg">
+            <source media="(max-width: 40rem)" srcset="img/map-street-now-phone.svg">
+            <source media="(prefers-reduced-motion: reduce)" srcset="img/map-street-now-still.svg">
+            <img src="img/map-street-now.svg" alt="The same map with 77th Street marked in green, one way from 5th Avenue through to 7th. Moving dots trace drivers up 5th Avenue, along 77th Street and down 7th Avenue onto the ramp to I-278, some by way of 79th Street and 6th Avenue." width="1340" height="838" loading="lazy">
           </picture>
         </div>
         <div class="layer layer-map" data-layer="map-parkway">
-          <img src="img/map-spot-parkway.svg" alt="The same map with Bay Ridge Parkway marked, two blocks north of 77th Street." width="1340" height="838" loading="lazy">
+          <picture>
+            <source media="(max-width: 40rem)" srcset="img/map-street-parkway-phone.svg">
+            <img src="img/map-street-parkway.svg" alt="The same map with Bay Ridge Parkway marked, two blocks north of 77th Street. It is 50 feet wide and runs both ways." width="1340" height="838" loading="lazy">
+          </picture>
         </div>
       </div>
       <div class="steps">
@@ -419,26 +429,37 @@
 
     <div class="story">
       <div class="stage">
-        <img class="map-base" src="img/map-spotlight.jpg" alt="" width="1920" height="1201" loading="lazy">
+        <picture>
+          <source media="(max-width: 40rem)" srcset="img/map-street-base-phone.svg">
+          <img class="map-base" src="img/map-street-base.svg" alt="" width="1340" height="838" loading="lazy">
+        </picture>
         <div class="layer layer-map on" data-layer="map-now">
-          <img src="img/map-spot-now.svg" alt="The map with 77th Street marked, running one way from 5th Avenue through to 7th Avenue. Moving dots trace drivers along 77th Street to 7th." width="1340" height="838" loading="lazy">
           <picture>
-            <source media="(prefers-reduced-motion: reduce)" srcset="img/map-flow-now-still.svg">
-            <img src="img/map-flow-now.svg" alt="" width="1340" height="838" loading="lazy">
+            <source media="(max-width: 40rem) and (prefers-reduced-motion: reduce)" srcset="img/map-street-now-still-phone.svg">
+            <source media="(max-width: 40rem)" srcset="img/map-street-now-phone.svg">
+            <source media="(prefers-reduced-motion: reduce)" srcset="img/map-street-now-still.svg">
+            <img src="img/map-street-now.svg" alt="The map with 77th Street marked in green, one way from 5th Avenue through to 7th. Moving dots trace drivers along it and onto the ramp to I-278." width="1340" height="838" loading="lazy">
           </picture>
         </div>
         <div class="layer layer-map" data-layer="map-reversed">
-          <img src="img/map-spot-reversed.svg?v=2" alt="The same map with 77th Street reversed between 6th and 7th Avenues. A driver's path from 5th Avenue reaches 6th Avenue and turns either way, and a Do Not Enter sign faces them across 6th. 79th Street already works this way. Moving dots show drivers from 5th Avenue turning at 6th." width="1340" height="838" loading="lazy">
           <picture>
-            <source media="(prefers-reduced-motion: reduce)" srcset="img/map-flow-reversed-still.svg">
-            <img src="img/map-flow-reversed.svg" alt="" width="1340" height="838" loading="lazy">
+            <source media="(max-width: 40rem) and (prefers-reduced-motion: reduce)" srcset="img/map-street-reversed-still-phone.svg">
+            <source media="(max-width: 40rem)" srcset="img/map-street-reversed-phone.svg">
+            <source media="(prefers-reduced-motion: reduce)" srcset="img/map-street-reversed-still.svg">
+            <img src="img/map-street-reversed.svg" alt="The same map with 77th Street reversed between 6th and 7th Avenues. Moving dots show drivers from 5th Avenue reaching 6th and turning either way, and a Do Not Enter sign faces them across 6th. 79th Street already works this way." width="1340" height="838" loading="lazy">
           </picture>
         </div>
         <div class="layer layer-map" data-layer="map-blocks">
-          <img src="img/map-spot-blocks.svg?v=2" alt="The map with speed humps marked twice on each block of 77th Street and 20 mph speed limit signs on both blocks." width="1340" height="838" loading="lazy">
+          <picture>
+            <source media="(max-width: 40rem)" srcset="img/map-street-blocks-phone.svg">
+            <img src="img/map-street-blocks.svg" alt="The map with speed humps marked twice on each block of 77th Street, for speed humps and a 20 mph limit." width="1340" height="838" loading="lazy">
+          </picture>
         </div>
         <div class="layer layer-map" data-layer="map-corners">
-          <img src="img/map-spot-corners.svg?v=2" alt="The map with the corners of 77th Street at 5th and 6th Avenues circled, for red light cameras and curb extensions." width="1340" height="838" loading="lazy">
+          <picture>
+            <source media="(max-width: 40rem)" srcset="img/map-street-corners-phone.svg">
+            <img src="img/map-street-corners.svg" alt="The map with the corners of 77th Street at 5th and 6th Avenues circled, for safer corners." width="1340" height="838" loading="lazy">
+          </picture>
         </div>
       </div>
       <div class="steps">
