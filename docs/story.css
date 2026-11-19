@@ -553,13 +553,19 @@ details.log td:last-child { overflow-wrap: anywhere; }
 /* ---- The crash clip pins in the middle of its own dark scene --------- */
 
 .clip {
+  --ink: #ecebe6;
+  --ink-soft: #c4c3bd;
+  --ink-faint: #9a9993;
   position: relative;
   z-index: 2;
   height: 160vh;
   height: 160svh;
   margin: 2.5rem 0;
-  background: var(--paper-sunk);
+  background: #1c1c1a;
+  color: var(--ink);
 }
+.clip sup a { color: var(--ink-faint); }
+.clip sup a:hover { color: var(--ink); }
 .clip-pin {
   position: sticky;
   top: var(--nav-h);
@@ -588,7 +594,7 @@ details.log td:last-child { overflow-wrap: anywhere; }
   width: 4.5rem;
   height: 4.5rem;
   transform: translate(-50%, -50%);
-  background: var(--ink);
+  background: #111111;
   border: 0;
   border-radius: 50%;
   box-shadow: 0 2px 16px rgba(0, 0, 0, .35);
@@ -609,7 +615,7 @@ details.log td:last-child { overflow-wrap: anywhere; }
 .clip figcaption { max-width: 34rem; margin: 0; color: var(--ink-soft); text-align: center; }
 
 @media print {
-  .clip { height: auto; background: none; color: inherit; }
+  .clip { --ink: #000; --ink-soft: #333; --ink-faint: #333; height: auto; background: none; color: inherit; }
   .clip-pin { position: static; height: auto; }
 }
 
@@ -629,4 +635,53 @@ details.log td:last-child { overflow-wrap: anywhere; }
 @media (max-width: 40rem) {
   .map-base,
   .layer-map img { object-position: 50% 50%; }
+}
+
+/* ---- Street maps sized by hand ------------------------------------------
+
+   The street maps animate, and browsers repaint an animated SVG unreliably
+   when object-fit crops it. So each map image takes its cropped size and
+   offset directly, framed exactly as object-fit: cover would frame it.
+   --bw, --bh and --bt give the box the map covers, --px its horizontal
+   anchor and --ar the drawing's width over height. */
+
+@supports (width: 1cqw) {
+  .js .stage { container-type: size; }
+
+  .map-base,
+  .layer-map img {
+    --bw: 100cqw;
+    --bh: 100cqh;
+    --bt: 0px;
+    --px: .62;
+    --ar: 1.599;
+    --w: max(var(--bw), var(--bh) * var(--ar));
+    --h: max(var(--bh), var(--bw) / var(--ar));
+    inset: auto;
+    left: calc((var(--bw) - var(--w)) * var(--px));
+    top: calc(var(--bt) + (var(--bh) - var(--h)) / 2);
+    width: var(--w);
+    height: var(--h);
+    max-width: none;
+    object-fit: fill;
+  }
+
+  @media (max-width: 60rem) {
+    .map-base,
+    .layer-map img {
+      --bh: 50svh;
+      --bt: calc(var(--nav-h) + 5vh);
+      --px: .7;
+      clip-path: inset(calc((var(--h) - var(--bh)) / 2) 0);
+    }
+  }
+
+  /* Phone drawings are 800 by 838. */
+  @media (max-width: 40rem) {
+    .map-base,
+    .layer-map img {
+      --px: .5;
+      --ar: .9547;
+    }
+  }
 }
