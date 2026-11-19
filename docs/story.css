@@ -291,12 +291,11 @@ html { --stage: #ffffff; }
 }
 .asks thead th { border-top: 0; color: var(--ink-faint); font-size: .875rem; font-weight: 400; }
 .asks tbody tr:first-child td { border-top: 2px solid var(--ink); }
-.asks td:first-child, .asks th:first-child { width: 2.25rem; color: var(--accent); }
-.asks td:nth-child(2) { font-weight: 700; }
+.asks td:first-child { font-weight: 700; }
 .asks td:last-child, .asks th:last-child { width: 30%; padding-right: 0; }
 .asks tbody tr:last-child td { border-bottom: 1px solid var(--rule); }
-.asks .ask-done td:nth-child(2) { font-weight: 400; }
-.asks .ask-done td:first-child { font-size: 1.25rem; font-weight: 700; line-height: 1.1; }
+.asks .ask-done td:first-child { font-weight: 400; }
+.asks .done-mark { margin-right: .4rem; color: var(--accent); font-weight: 700; }
 .asks sup a { text-decoration: none; }
 
 .brief th { width: 8rem; }
