@@ -20,7 +20,7 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preload" href="fonts/pw-heros-regular.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="styles.css?v=9">
-<link rel="stylesheet" href="story.css?v=49">
+<link rel="stylesheet" href="story.css?v=51">
 <script src="story.js?v=19" defer></script>
 </head>
 <body class="story-body">
@@ -114,26 +114,16 @@
       <h2 id="shortcut-h">Shortcut</h2>
     </div>
 
-    <div class="story">
-      <div class="stage">
-        <picture>
-          <source media="(max-width: 40rem)" srcset="img/map-street-base-phone.svg">
-          <img class="map-base" src="img/map-street-base.svg" alt="" width="1340" height="838" loading="lazy">
-        </picture>
-        <div class="layer layer-wide on" data-layer="wide">
-          <img src="img/map-wide-light.jpg" alt="" width="1600" height="1000" loading="lazy">
-          <img src="img/map-wide-light.svg" alt="An aerial photo of southwest Brooklyn with 77th Street circled at the center, and the Verrazzano-Narrows Bridge to the southwest." width="1600" height="1000" loading="lazy">
-        </div>
-        <div class="layer layer-route" data-layer="route">
-          <img src="img/route.jpg" alt="Phone navigation screenshot at 8:05 in the morning. The route turns from 5th Avenue onto 77th Street and follows it to the service road beside I-278. A second route, marked similar ETA, runs along 79th Street, up 6th Avenue and onto the same block of 77th Street." width="700" height="1270" loading="lazy">
-        </div>
-        <div class="layer layer-map" data-layer="map-plain">
+    <div class="after">
+      <p>Our two blocks sit near the approach to the Verrazzano.<sup><a href="#r9">9</a></sup> Few streets here lead from 5th Avenue to the highway. Between Bay Ridge Parkway and 80th Street, only ours runs one way from 5th through to 7th.<sup><a href="#r2">2</a></sup></p>
+    </div>
+    <div class="mapfigs mapfigs-route">
+      <figure>
+        <div class="mapstack">
           <picture>
-            <source media="(max-width: 40rem)" srcset="img/map-street-plain-phone.svg">
-            <img src="img/map-street-plain.svg" alt="Map of the numbered streets between 5th and 7th Avenues, with an arrow on each one-way street." width="1340" height="838" loading="lazy">
+            <source media="(max-width: 40rem)" srcset="img/map-street-base-phone.svg">
+            <img src="img/map-street-base.svg" alt="" width="1340" height="838" loading="lazy">
           </picture>
-        </div>
-        <div class="layer layer-map" data-layer="map-now">
           <picture>
             <source media="(max-width: 40rem) and (prefers-reduced-motion: reduce)" srcset="img/map-street-now-still-phone.svg">
             <source media="(max-width: 40rem)" srcset="img/map-street-now-phone.svg">
@@ -141,42 +131,15 @@
             <img src="img/map-street-now.svg" alt="The same map with 77th Street marked in green, one way from 5th Avenue through to 7th. Moving dots trace drivers up 5th Avenue, along 77th Street and down 7th Avenue onto the ramp to I-278, some by way of 79th Street and 6th Avenue." width="1340" height="838" loading="lazy">
           </picture>
         </div>
-        <div class="layer layer-map" data-layer="map-parkway">
-          <picture>
-            <source media="(max-width: 40rem)" srcset="img/map-street-parkway-phone.svg">
-            <img src="img/map-street-parkway.svg" alt="The same map with Bay Ridge Parkway marked, two blocks north of 77th Street. It is 50 feet wide and runs both ways." width="1340" height="838" loading="lazy">
-          </picture>
-        </div>
-      </div>
-      <div class="steps">
-        <div class="step" data-show="wide">
-          <div class="card">
-            <p>Our two blocks sit near the approach to the Verrazzano.<sup><a href="#r9">9</a></sup></p>
-          </div>
-        </div>
-        <div class="step" data-show="route">
-          <div class="card">
-            <p class="card-time">8:05 a.m.</p>
-            <p>This navigation app sends a driver headed for the Verrazzano down 77th Street.<sup><a href="#r1">1</a></sup> Its other route uses our block too.</p>
-          </div>
-        </div>
-        <div class="step" data-show="map-plain">
-          <div class="card">
-            <p>Few streets here lead from 5th Avenue to the highway.</p>
-          </div>
-        </div>
-        <div class="step" data-show="map-now">
-          <div class="card">
-            <p>Between Bay Ridge Parkway and 80th Street, only ours runs one way from 5th through to 7th.<sup><a href="#r2">2</a></sup></p>
-            <p>The dots trace the app's two routes, for illustration.</p>
-          </div>
-        </div>
-        <div class="step" data-show="map-parkway">
-          <div class="card">
-            <p>Bay Ridge Parkway, two blocks north, is 50 feet wide and runs both ways.<sup><a href="#r2">2</a></sup> Ours is 30 feet with one lane.</p>
-          </div>
-        </div>
-      </div>
+        <figcaption>The route along our blocks to the highway. The dots trace the app's two routes, for illustration.</figcaption>
+      </figure>
+      <figure>
+        <img src="img/route.jpg" alt="Phone navigation screenshot at 8:05 in the morning. The route turns from 5th Avenue onto 77th Street and follows it to the service road beside I-278. A second route, marked similar ETA, runs along 79th Street, up 6th Avenue and onto the same block of 77th Street." width="700" height="1270" loading="lazy">
+        <figcaption>8:05 a.m. A navigation app sends a driver headed for the Verrazzano down 77th Street. Its other route uses our block too.<sup><a href="#r1">1</a></sup></figcaption>
+      </figure>
+    </div>
+    <div class="after">
+      <p>Bay Ridge Parkway, two blocks north, is 50 feet wide and runs both ways.<sup><a href="#r2">2</a></sup> Ours is 30 feet with one lane.</p>
     </div>
 
   </section>
@@ -371,68 +334,37 @@
       <h2 id="changes-h">Changes</h2>
     </div>
 
-    <div class="story">
-      <div class="stage">
-        <picture>
-          <source media="(max-width: 40rem)" srcset="img/map-street-base-phone.svg">
-          <img class="map-base" src="img/map-street-base.svg" alt="" width="1340" height="838" loading="lazy">
-        </picture>
-        <div class="layer layer-map on" data-layer="map-now">
+    <div class="after">
+      <p>Today, drivers can follow 77th Street from 5th Avenue through to 7th Avenue. We suggest changes in three places. Each one helps on its own.</p>
+    </div>
+    <div class="mapfigs mapfigs-three">
+      <figure>
+        <h3 class="mapfig-title">End the shortcut</h3>
+        <div class="mapstack">
+          <picture><img src="img/map-street-base-phone.svg" alt="" width="800" height="838" loading="lazy"></picture>
           <picture>
-            <source media="(max-width: 40rem) and (prefers-reduced-motion: reduce)" srcset="img/map-street-now-still-phone.svg">
-            <source media="(max-width: 40rem)" srcset="img/map-street-now-phone.svg">
-            <source media="(prefers-reduced-motion: reduce)" srcset="img/map-street-now-still.svg">
-            <img src="img/map-street-now.svg" alt="The map with 77th Street marked in green, one way from 5th Avenue through to 7th. Moving dots trace drivers along it and onto the ramp to I-278." width="1340" height="838" loading="lazy">
+            <source media="(prefers-reduced-motion: reduce)" srcset="img/map-street-reversed-still-phone.svg">
+            <img src="img/map-street-reversed-phone.svg" alt="The same map with 77th Street reversed between 6th and 7th Avenues. Moving dots show drivers from 5th Avenue reaching 6th and turning either way, and a Do Not Enter sign faces them across 6th. 79th Street already works this way." width="800" height="838" loading="lazy">
           </picture>
         </div>
-        <div class="layer layer-map" data-layer="map-reversed">
-          <picture>
-            <source media="(max-width: 40rem) and (prefers-reduced-motion: reduce)" srcset="img/map-street-reversed-still-phone.svg">
-            <source media="(max-width: 40rem)" srcset="img/map-street-reversed-phone.svg">
-            <source media="(prefers-reduced-motion: reduce)" srcset="img/map-street-reversed-still.svg">
-            <img src="img/map-street-reversed.svg" alt="The same map with 77th Street reversed between 6th and 7th Avenues. Moving dots show drivers from 5th Avenue reaching 6th and turning either way, and a Do Not Enter sign faces them across 6th. 79th Street already works this way." width="1340" height="838" loading="lazy">
-          </picture>
+        <figcaption>Reverse the block between 6th and 7th Avenues. Drivers coming from 5th would reach 6th and have to turn, so the route to the highway stops working. 79th Street already works this way.<sup><a href="#r2">2</a></sup> We would change our own routes too.</figcaption>
+      </figure>
+      <figure>
+        <h3 class="mapfig-title">Slow the blocks</h3>
+        <div class="mapstack">
+          <picture><img src="img/map-street-base-phone.svg" alt="" width="800" height="838" loading="lazy"></picture>
+          <picture><img src="img/map-street-blocks-phone.svg" alt="The map with speed humps marked twice on each block of 77th Street, for speed humps and a 20 mph limit." width="800" height="838" loading="lazy"></picture>
         </div>
-        <div class="layer layer-map" data-layer="map-blocks">
-          <picture>
-            <source media="(max-width: 40rem)" srcset="img/map-street-blocks-phone.svg">
-            <img src="img/map-street-blocks.svg" alt="The map with speed humps marked twice on each block of 77th Street, for speed humps and a 20 mph limit." width="1340" height="838" loading="lazy">
-          </picture>
+        <figcaption>Add speed humps and a 20 mph limit on both blocks. Narrow the lane as a low-traffic pilot. Drivers who still come through would have to slow down.</figcaption>
+      </figure>
+      <figure>
+        <h3 class="mapfig-title">Fix the corners</h3>
+        <div class="mapstack">
+          <picture><img src="img/map-street-base-phone.svg" alt="" width="800" height="838" loading="lazy"></picture>
+          <picture><img src="img/map-street-corners-phone.svg" alt="The map with the corners of 77th Street at 5th and 6th Avenues circled, for safer corners." width="800" height="838" loading="lazy"></picture>
         </div>
-        <div class="layer layer-map" data-layer="map-corners">
-          <picture>
-            <source media="(max-width: 40rem)" srcset="img/map-street-corners-phone.svg">
-            <img src="img/map-street-corners.svg" alt="The map with the corners of 77th Street at 5th and 6th Avenues circled, for safer corners." width="1340" height="838" loading="lazy">
-          </picture>
-        </div>
-      </div>
-      <div class="steps">
-        <div class="step" data-show="map-now">
-          <div class="card">
-            <p>Today, drivers can follow 77th Street from 5th Avenue through to 7th Avenue.</p>
-            <p>We suggest changes in three places. Each one helps on its own.</p>
-          </div>
-        </div>
-        <div class="step" data-show="map-reversed">
-          <div class="card">
-            <p class="card-time">End the shortcut</p>
-            <p>Reverse the block between 6th and 7th Avenues. Drivers coming from 5th would reach 6th and have to turn, so the route to the highway stops working.</p>
-            <p>79th Street already works this way.<sup><a href="#r2">2</a></sup> We would change our own routes too.</p>
-          </div>
-        </div>
-        <div class="step" data-show="map-blocks">
-          <div class="card">
-            <p class="card-time">Slow the blocks</p>
-            <p>Add speed humps and a 20 mph limit on both blocks. Narrow the lane as a low-traffic pilot. Drivers who still come through would have to slow down.</p>
-          </div>
-        </div>
-        <div class="step" data-show="map-corners">
-          <div class="card">
-            <p class="card-time">Fix the corners</p>
-            <p>Add red light cameras and curb extensions at 5th and 6th Avenues, where most of our crashes happen.<sup><a href="#r5">5</a></sup> Ask police to check trucks and speeding at rush hour.</p>
-          </div>
-        </div>
-      </div>
+        <figcaption>Add red light cameras and curb extensions at 5th and 6th Avenues, where most of our crashes happen.<sup><a href="#r5">5</a></sup> Ask police to check trucks and speeding at rush hour.</figcaption>
+      </figure>
     </div>
 
     <div id="want" class="want">
@@ -456,7 +388,6 @@
       </table>
       <p>Sammy's Law lets the City set 20 mph on streets like ours, and DOT puts places near schools first.<sup><a href="#r14">14</a></sup> We are asking Community Board 10 to join the boards that have requested it.<sup><a href="#r15">15</a>,<a href="#r16">16</a></sup></p>
       <p>Int 1070, a City Council bill, would start a two-year low-traffic pilot in five neighborhoods, and we want our blocks to be Bay Ridge's site.<sup><a href="#r17">17</a></sup> DOT is already laying the groundwork for one around a Greenpoint school.<sup><a href="#r18">18</a></sup></p>
-      <p><a class="cta" href="#sign">Sign the petition</a></p>
     </div>
     </div>
   </section>

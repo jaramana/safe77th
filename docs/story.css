@@ -333,6 +333,33 @@ caption.ex {
 }
 .after figure img, .after figure video { border: 0; }
 
+/* ---- Still street maps ------------------------------------------------- */
+
+/* Each map stacks a frame over the shared base. Both share one viewBox, so
+   they line up at any width with no cropping. The route row sizes its
+   columns by aspect ratio, so the map and the screenshot stand equally tall. */
+
+.mapfigs {
+  display: grid;
+  gap: 1.5rem;
+  max-width: calc(var(--wide) + 2 * var(--gutter));
+  margin: 1.5rem auto 0;
+  padding: 0 var(--gutter);
+}
+.mapfigs figure { margin: 0; }
+.mapfigs-route { grid-template-columns: 1.6fr .55fr; align-items: start; }
+.mapfigs-three { grid-template-columns: repeat(3, 1fr); align-items: start; }
+.mapstack { position: relative; background: var(--stage); border: 1px solid var(--rule); }
+.mapstack img { display: block; width: 100%; height: auto; border: 0; }
+.mapstack picture + picture img { position: absolute; inset: 0; height: 100%; background: none; }
+.mapfigs-route figure > img { display: block; width: 100%; height: auto; border: 1px solid var(--rule); }
+.mapfigs figcaption { margin-top: .5rem; color: var(--ink-soft); font-size: .875rem; line-height: 1.45; }
+.story-body .mapfig-title { margin: 0 0 .5rem; font-size: 1.125rem; }
+@media (max-width: 48rem) {
+  .mapfigs-route, .mapfigs-three { grid-template-columns: 1fr; gap: 2rem; }
+  .mapfigs-route figure:last-child { max-width: 18rem; }
+}
+
 /* One lunch hour: three photos, each under its time. */
 .lunch {
   max-width: calc(var(--wide) + 2 * var(--gutter));
